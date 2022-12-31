@@ -1,14 +1,43 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <link rel="stylesheet" href="css/style.css">
+</head>
 <body>
 
     <h1>My First Heading</h1>
     <p>My first paragraph.</p>
-    <main class="createGame">
-        <form action="createGame.html">
-            <button type="submit" class="btn">Create Game</button>
-        </form>
-    </main>
+    <div class="createGame">
+        <!--param 1 is create game, param 2 is to join a game-->
+        <button class="btn" onclick="showPopup(1)">Create Game</button>
+        <button class="btn" onclick="showPopup(2)">Join Game</button>
+        <div class="popup" id="createGamePopup">
+            <form action="createGame.html">
+                <div class="form-control">
+                    <label for="Room Number">Create Room Number:</label>
+                    <input
+                        type="text"
+                        placeholder="Game Room"
+                        required
+                    />
+                </div>
+                <button type="submit" class="btn">Create</button>
+            </form>
+        </div>
+        <div class="popup" id="joinGamePopup">
+            <form action="createGame.html">
+                <div class="form-control">
+                    <label for="Room Number">Join Room Number:</label>
+                    <input
+                        type="text"
+                        placeholder="Game Room"
+                        required
+                    />
+                </div>
+                <button type="submit" class="btn">Join</button>
+            </form>
+        </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/client.js"></script>
 
