@@ -12,29 +12,31 @@
         <button class="btn" onclick="showPopup(1)">Create Game</button>
         <button class="btn" onclick="showPopup(2)">Join Game</button>
         <div class="popup" id="createGamePopup">
-            <form action="createGame.html">
+            <form onsubmit="return false">
                 <div class="form-control">
                     <label for="Room Number">Create Room Number:</label>
                     <input
                         type="text"
                         placeholder="Game Room"
+                        id="createGameRoomID"
                         required
                     />
                 </div>
-                <button type="submit" class="btn">Create</button>
+                <button type="submit" class="btn" onclick="joinSocketRoom(1)">Create</button>
             </form>
         </div>
         <div class="popup" id="joinGamePopup">
-            <form action="createGame.html">
+            <form onsubmit="return false">
                 <div class="form-control">
                     <label for="Room Number">Join Room Number:</label>
                     <input
                         type="text"
                         placeholder="Game Room"
+                        id="joinGameRoomID"
                         required
                     />
                 </div>
-                <button type="submit" class="btn">Join</button>
+                <button type="submit" class="btn" onclick="joinSocketRoom(2)">Join</button>
             </form>
         </div>
     </div>

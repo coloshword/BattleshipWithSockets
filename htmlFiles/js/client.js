@@ -1,9 +1,4 @@
 const socket = io();
-const createGameBtn = document.getElementById("createGame");
-createGameBtn.addEventListener("click", function(e) {
-    socket.emit('create game');
-});
-
 
 function showPopup(option) {
     let popup;
@@ -18,4 +13,18 @@ function showPopup(option) {
     }
     popup.classList.add("open-popup");
     remove.classList.remove("open-popup");
+}
+
+// param option -- 1 is create game, 2 is join game 
+//called when client creates room or join rooms. Socket joins the room with form value
+function joinSocketRoom(option) {
+    let gameRoomVal;
+    if(option == 1 ) {
+        gameRoomVal = document.getElementById("createGameRoomID").value;// create game value
+    }
+    else {
+        gameRoomVal = document.getElementById("joinGameRoomID").value; // join game room val 
+    }
+    // join this room
+    socket.emit("joinEvent", gameRoomVal);
 }

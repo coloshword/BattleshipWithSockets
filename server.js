@@ -10,9 +10,12 @@ app.use(express.static(path.join(__dirname, 'htmlFiles'))); // express uses the 
 
 io.on('connection', (socket) => {
   console.log('a user connected');
-  socket.on('create game', (value) => {  // socket.on requires a value to be passed, even if the emit event doesn't emit a value    
-    console.log("game created");
-  });  
+
+  socket.on('joinEvent', (gameRoomVal) => {
+    console.log("joining game room")
+    socket.join(gameRoomVal);
+  })
+  
 });
 
 server.listen(3000, () => {
