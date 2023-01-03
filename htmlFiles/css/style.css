@@ -14,3 +14,20 @@
 .open-popup{
     visibility: visible;
 }
+
+.postCreateGameDisplay {
+    width:400px;
+    background: #CBC3E3;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 0 30px 30px;
+    display: none;
+}
+
+.open-postCreateGameDisplay {
+    visibility: visible;
+}

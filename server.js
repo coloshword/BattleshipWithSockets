@@ -23,6 +23,8 @@ io.on('connection', (socket) => {
       gameRoomsNumConnect[numGameRooms] = 1;
       numGameRooms++;
       socket.join(gameRoomVal);
+    } else{
+      console.log("this game already exists, please choose another");
     }
   })
   socket.on('joinRoom', (gameRoomVal) => {
@@ -44,31 +46,6 @@ io.on('connection', (socket) => {
       }
     }
   })
-    // let gameRoomIndex = gameRooms.indexOf(gameRoomVal);
-    // if(gameRoomIndex == -1) {
-    //   // it doesn't exist so we add to the array
-    //   gameRooms[numGameRooms] = gameRoomVal;
-    //   gameRoomsNumConnect[numGameRooms] = 1;
-    //   numGameRooms++;
-    //   socket.join(gameRoomVal);
-    // }
-    // else {
-    //   // it exists to we have to see how many people are currently connected
-    //   if(gameRoomsNumConnect[gameRoomIndex] < 2) {
-    //     // we can connect another person
-    //     gameRoomsNumConnect[gameRoomIndex]++;
-    //     // game starts in this room
-    //     socket.join(gameRoomVal);
-    //     io.to(gameRoomVal).emit("startGame");
-    //     console.log("Starting a game");
-    //   }
-    //   else {
-    //     console.log("this room is full already");
-    //   }
-    // }
-    // for(let i = 0; i < gameRooms.length; i++) {
-    //   console.log(gameRooms[i]);
-    // }
   
 });
 
