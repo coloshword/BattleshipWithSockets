@@ -44,17 +44,19 @@ function postSubmitDisplay() {
 //called when client creates room or join rooms. Socket joins the room with form value
 function joinSocketRoom(option) {
     let gameRoomVal;
-    console.log(gameRoomVal);
-    if(gameRoomVal == undefined) {
-        return;  // no game room was provided, so ignore
-    }
     if(option == 1 ) {
         gameRoomVal = document.getElementById("createGameRoomID").value;// create game value
+        if(gameRoomVal == undefined) {
+            return;  // no game room was provided, so ignore
+        }
         socket.emit("createGame", gameRoomVal);
         postSubmitDisplay();
     }
     else {
         gameRoomVal = document.getElementById("joinGameRoomID").value; // join game room val 
+        if(gameRoomVal == undefined) {
+            return;  // no game room was provided, so ignore
+        }
         socket.emit("joinRoom", gameRoomVal);
     }
 }
