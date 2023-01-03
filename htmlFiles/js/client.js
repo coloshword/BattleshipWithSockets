@@ -31,10 +31,10 @@ function joinSocketRoom(option) {
     let gameRoomVal;
     if(option == 1 ) {
         gameRoomVal = document.getElementById("createGameRoomID").value;// create game value
+        socket.emit("createGame", gameRoomVal);
     }
     else {
         gameRoomVal = document.getElementById("joinGameRoomID").value; // join game room val 
+        socket.emit("joinRoom", gameRoomVal);
     }
-    // join this room
-    socket.emit("joinEvent", gameRoomVal);
 }
