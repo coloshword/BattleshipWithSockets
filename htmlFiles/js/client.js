@@ -1,5 +1,15 @@
 const socket = io();
 
+// client socket events
+// socket.on("startGame"), (arg) => {
+//     console.log("game started");
+// }
+socket.on('startGame', function (result){
+    window.location.href = "gameLoop.html";
+});
+
+
+//Helper functions
 function showPopup(option) {
     let popup;
     let remove;
