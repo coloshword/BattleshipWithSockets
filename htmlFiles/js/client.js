@@ -2,14 +2,19 @@ const socket = io();
 let socket_room;    // THE SOCKET ROOM that the game occurs in(and hence joins)
 
 var gameDisplay = (" \
-<!DOCTYPE html> \
-<html> \
-<body> \
-    <h1>GAME START</h1> \
-    <p>This is battleship ahaha</p> \
-    <button onclick=sendMsgServer();>send msg</button> \
- \
-</body> \
+<!DOCTYPE html>\
+<html>\
+<head>\
+    <link rel=\"stylesheet\" href=\"css/gameStyle.css\"\
+</head>\
+<body>\
+    <h1>GAME START</h1>\
+    <p>This is battleship ahaha</p>\
+    <div id=\"gridArea\"></div>\
+    <button onclick=sendMsgServer();>send msg</button>\
+    <script src=\"js/battleship.js\"></script>\
+\
+</body>\
 </html> \
 ");
 
@@ -29,8 +34,7 @@ socket.on('msg', function(msgval){
 
 
 
-
-//Front End Helper functions
+//Front End Helper functions for the landing page 
 function showPopup(option) {
     let popup;
     let remove;
