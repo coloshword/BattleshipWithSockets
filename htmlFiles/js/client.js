@@ -1,5 +1,5 @@
-const socket = io();
-let socket_room; 
+const socket = io(); 
+let socket_room;    // THE SOCKET ROOM that the game occurs in(and hence joins)
 
 var gameDisplay = (" \
 <!DOCTYPE html> \
@@ -74,6 +74,7 @@ function joinSocketRoom(option) {
             return;  // no game room was provided, so ignore
         }
         socket.emit("createGame", gameRoomVal);
+        socket_room = gameRoomVal;
         postSubmitDisplay();
     }
     else {

@@ -9,9 +9,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, 'htmlFiles'))); // express uses the html folder 
 
 let gameRooms = [];
-let gameRoomsNumConnect = [];
 let numGameRooms = 0;
-let numconnections = 0;
 
 io.on('connection', (socket) => {
   console.log('a user connected');
@@ -20,7 +18,6 @@ io.on('connection', (socket) => {
     if(!gameRooms.includes(gameRoomVal)) {
       // if not included -- add it
       gameRooms[numGameRooms] = gameRoomVal;
-      gameRoomsNumConnect[numGameRooms] = 1;
       numGameRooms++;
       socket.join(gameRoomVal);
     } else{
@@ -35,8 +32,9 @@ io.on('connection', (socket) => {
       console.log("game doesn't exist");
     }
     else { // game exists so join the socket if less than 2 people
-      if (gameRoomsNumConnect[gameRoomIndex] < 2) {
-        gameRoomsNumConnect[gameRoomIndex]++;
+      const clients = io.sockets.adapter.rooms.get(gameRoomVal);
+      const numClients = clients ? clients.size : 0;
+      if (numClients < 2) {
         socket.join(gameRoomVal); // connect this socket and start game event
         io.to(gameRoomVal).emit("startGame");
       } 
@@ -51,6 +49,7 @@ io.on('connection', (socket) => {
     const clients = io.sockets.adapter.rooms.get(socket_room);
     const numClients = clients ? clients.size : 0;
     console.log(numClients);
+    console.log(socket.rooms);
     io.to(socket_room).emit('msg', "i got ur message, battleship client");
   })
   
