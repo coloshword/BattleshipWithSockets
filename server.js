@@ -46,6 +46,13 @@ io.on('connection', (socket) => {
       }
     }
   })
+
+  socket.on('ack', (socket_room) => {
+    const clients = io.sockets.adapter.rooms.get(socket_room);
+    const numClients = clients ? clients.size : 0;
+    console.log(numClients);
+    io.to(socket_room).emit('msg', "i got ur message, battleship client");
+  })
   
 });
 

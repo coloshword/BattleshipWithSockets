@@ -1,9 +1,33 @@
 const socket = io();
+let socket_room; 
 
+var gameDisplay = (" \
+<!DOCTYPE html> \
+<html> \
+<body> \
+    <h1>GAME START</h1> \
+    <p>This is battleship ahaha</p> \
+    <button onclick=sendMsgServer();>send msg</button> \
+ \
+</body> \
+</html> \
+");
 
+//Starting game
 socket.on('startGame', function (result){
-    window.location.href = "gameLoop.html";
+    document.write(gameDisplay);
 });
+
+function sendMsgServer() {
+    socket.emit('ack', socket_room);
+}
+
+socket.on('msg', function(msgval){
+    console.log(msgval);
+})
+
+
+
 
 
 //Front End Helper functions
@@ -58,5 +82,6 @@ function joinSocketRoom(option) {
             return;  // no game room was provided, so ignore
         }
         socket.emit("joinRoom", gameRoomVal);
+        socket_room = gameRoomVal;
     }
 }
