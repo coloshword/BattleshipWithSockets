@@ -11,7 +11,7 @@ var gameDisplay = (" \
     <h1>GAME START</h1>\
     <p>This is battleship ahaha</p>\
     <div id=\"gridArea\"></div>\
-    <button onclick=sendMsgServer();>send msg</button>\
+    <button onclick=\"sendMsgServer()\">send msg</button>\
     <script src=\"js/battleship.js\"></script>\
 \
 </body>\

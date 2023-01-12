@@ -7,3 +7,7 @@ td {
 table {
     border-collapse: collapse;
 }
+
+.clickedBox {
+    color:aquamarine;
+}
