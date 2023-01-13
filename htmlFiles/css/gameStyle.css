@@ -11,3 +11,17 @@ table {
 .clickedBox {
     background-color: aquamarine;
 }
+
+/* td classes */
+.cell {
+    border: 1px solid rgb(138, 138, 221);
+}
+
+.ship {
+    border: 2px solid rgba(38,0,255,255);
+    background-color: rgba(242,244,255,255);
+}
+
+.padding {
+    padding: 30px;
+}

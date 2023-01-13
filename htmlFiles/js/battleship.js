@@ -3,7 +3,7 @@ function createGrid() {
     for(i=0; i<10;i++) {
         html += "<tr>";
         for(j=0; j<10;j++) {
-            html+= `<td id=cell.${i}.${j} onclick="changeColor(${i}, ${j})"></td>`;
+            html+= `<td class='cell' id=cell.${i}.${j} onclick="changeColor(${i}, ${j})"></td>`;
         }
         html += "</tr>\n"
     }
@@ -16,7 +16,7 @@ function createGrid() {
 function createDragableShips() {
     // create the ships and make them html 
     html = "<table id='ship'> \
-    <td id=oneShip draggable='true'></td>";
+    <td class='ship' id=oneShip draggable='true'></td>";
     const shipArea = document.getElementById('shipsArea');
     shipArea.innerHTML = html;
 }
