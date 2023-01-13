@@ -90,3 +90,4 @@ function joinSocketRoom(option) {
         socket_room = gameRoomVal;
     }
 }
+

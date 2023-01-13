@@ -14,10 +14,10 @@ function createGrid() {
 }
 
 function changeColor(i, j) {
-    //turn the color 
-    //currentCell = document.getElementById(`cell.${i}.${j}`);
+    // get the correct thing
+    var cell = document.getElementById(`cell.${i}.${j}`);
+    cell.classList.add("clickedBox");
     console.log(`${i} ${j}`);
-    //currentCell.classList.add("clickedBox");
 }
 
 gameLoopHTML = createGrid();
