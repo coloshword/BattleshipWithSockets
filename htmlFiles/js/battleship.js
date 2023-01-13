@@ -13,6 +13,14 @@ function createGrid() {
     return html;
 }
 
+function createDragableShips() {
+    // create the ships and make them html 
+    html = "<table id='ship'> \
+    <td id=oneShip draggable='true'></td>";
+    const shipArea = document.getElementById('shipsArea');
+    shipArea.innerHTML = html;
+}
+
 function changeColor(i, j) {
     // get the correct thing
     var cell = document.getElementById(`cell.${i}.${j}`);
@@ -21,3 +29,4 @@ function changeColor(i, j) {
 }
 
 gameLoopHTML = createGrid();
+createDragableShips();
