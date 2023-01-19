@@ -1,5 +1,4 @@
 td {
-    border: 1px solid rgb(138, 138, 221);
     height: 40px;
     width: 40px;
 }
@@ -21,6 +20,10 @@ table {
 .ship {
     border: 2px solid rgba(38,0,255,255);
     background-color: rgba(242,244,255,255);
+}
+
+.formerShip {
+    border: 2px dotted rgb(105,105,105);
 }
 
 .padding {

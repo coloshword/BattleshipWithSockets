@@ -33,7 +33,10 @@ function onDragOver(event) {
 
 function onDragEnd(event) {
     console.log(event.target.id);
-    console.log(event.dataTransfer.getData("text"));
+    droppedShip = document.getElementById(event.dataTransfer.getData("text")); // the original ship needs to remove draggable
+    droppedShip.draggable = false; 
+    droppedShip.classList.remove('ship');
+    droppedShip.classList.add('formerShip');
     dropLocation = document.getElementById(event.target.id);
     dropLocation.classList.add('ship');
 }
