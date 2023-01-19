@@ -3,7 +3,7 @@ function createGrid() {
     for(i=0; i<10;i++) {
         html += "<tr>";
         for(j=0; j<10;j++) {
-            html+= `<td class='cell' id=cell.${i}.${j} onclick="changeColor(${i}, ${j})"></td>`;
+            html+= `<td class='cell' id='cell.${i}.${j}' ondragover='onDragOver(event)' ondrop='onDragEnd(event)'></td>`;
         }
         html += "</tr>\n"
     }
@@ -16,16 +16,26 @@ function createGrid() {
 function createDragableShips() {
     // create the ships and make them html 
     html = "<table id='ship'> \
-    <td class='ship' id=oneShip draggable='true'></td>";
+    <td class='ship' id=1Ship draggable='true' ondragstart='dragStart(event)' =></td>";
     const shipArea = document.getElementById('shipsArea');
     shipArea.innerHTML = html;
 }
 
-function changeColor(i, j) {
-    // get the correct thing
-    var cell = document.getElementById(`cell.${i}.${j}`);
-    cell.classList.add("clickedBox");
-    console.log(`${i} ${j}`);
+// drag events 
+function dragStart(event) {
+    console.log("being dragged");
+    event.dataTransfer.setData("text", event.target.id);
+}
+
+function onDragOver(event) {
+    event.preventDefault();
+}
+
+function onDragEnd(event) {
+    console.log(event.target.id);
+    console.log(event.dataTransfer.getData("text"));
+    dropLocation = document.getElementById(event.target.id);
+    dropLocation.classList.add('ship');
 }
 
 gameLoopHTML = createGrid();
