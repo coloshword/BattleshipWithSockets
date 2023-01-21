@@ -1,6 +1,7 @@
 // GLOBALS
 var shipMoved = ''; // will be a string indicating which ship is the one being moved
 var shipMovedAtIndex = -1; // Indicates which index cell is the one being dragged based on shipMoved
+const numS = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
 
 function createGrid() {
     html = "<table id=\"grid\">\n";
@@ -18,11 +19,19 @@ function createGrid() {
 }
 
 function createDragableShips() {
-    // create the ships and make them html 
-    html = "<table class='ship' id='1Ship' draggable='true' ondragstart='dragStart(event)'> \
-    <td onmousedown='shipMovedAtIndex=0'></td>";
-    html += "<table class='ship' id='4Ship' draggable='true' ondragstart='dragStart(event)'> \
-    <td onmousedown='shipMovedAtIndex=0'></td><td onclick='onmousedown=1'></td><td onmousedown='shipMovedAtIndex=2'></td><td onmousedown='shipMovedAtIndex=3'></td>";
+    html = "";
+    let shipSize = 1;
+    let numShipsPerSize = 4;
+    for(let numTypeShips = 0; numTypeShips < 4; numTypeShips++) {
+        for(let i = numShipsPerSize; i > 0; i--) {
+            html += `<table class='ship' id='${shipSize}Ship${i}' draggable='true' ondragstart='dragStart(event)'><br>`
+            for(let numcells=0; numcells < shipSize; numcells++) {
+                html += `<td onmousedown='shipMovedAtIndex=${numcells}'></td>`
+            }
+        }
+        shipSize++;
+        numShipsPerSize--;
+    }
     const shipArea = document.getElementById('shipsArea');
     shipArea.innerHTML = html;
 }
