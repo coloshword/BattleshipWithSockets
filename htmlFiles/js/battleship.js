@@ -1,3 +1,7 @@
+// GLOBALS
+var shipMoved = ''; // will be a string indicating which ship is the one being moved
+var shipMovedAtIndex = -1; // Indicates which index cell is the one being dragged based on shipMoved
+
 function createGrid() {
     html = "<table id=\"grid\">\n";
     for(i=0; i<10;i++) {
@@ -15,8 +19,10 @@ function createGrid() {
 
 function createDragableShips() {
     // create the ships and make them html 
-    html = "<table id='ship'> \
-    <td class='ship' id=1Ship draggable='true' ondragstart='dragStart(event)' =></td>";
+    html = "<table class='ship' id='1Ship' draggable='true' ondragstart='dragStart(event)'> \
+    <td onmousedown='shipMovedAtIndex=0'></td>";
+    html += "<table class='ship' id='4Ship' draggable='true' ondragstart='dragStart(event)'> \
+    <td onmousedown='shipMovedAtIndex=0'></td><td onclick='onmousedown=1'></td><td onmousedown='shipMovedAtIndex=2'></td><td onmousedown='shipMovedAtIndex=3'></td>";
     const shipArea = document.getElementById('shipsArea');
     shipArea.innerHTML = html;
 }
@@ -24,6 +30,8 @@ function createDragableShips() {
 // drag events 
 function dragStart(event) {
     console.log("being dragged");
+    shipMoved = document.getElementById(event.target.id);
+    console.log(shipMovedAtIndex);
     event.dataTransfer.setData("text", event.target.id);
 }
 
@@ -38,7 +46,13 @@ function onDragEnd(event) {
     droppedShip.classList.remove('ship');
     droppedShip.classList.add('formerShip');
     dropLocation = document.getElementById(event.target.id);
-    dropLocation.classList.add('ship');
+    dropLocation.classList.add('ship'); // it is a cell and it is a ship 
+}
+
+// used to update the lastmoved index for ship
+function lastMoved(x) {
+    console.log("updating");
+    shipMovedAtIndex = x;
 }
 
 gameLoopHTML = createGrid();
