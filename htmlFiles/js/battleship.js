@@ -8,7 +8,7 @@ function createGrid() {
     for(i=0; i<10;i++) {
         html += "<tr>";
         for(j=0; j<10;j++) {
-            html+= `<td class='cell' id='cell.${i}.${j}' ondragover='onDragOver(event)' ondrop='onDragEnd(event)'></td>`;
+            html+= `<td class='cell' id='${j}${i}' ondragover='onDragOver(event)' ondrop='onDragEnd(event)'></td>`;
         }
         html += "</tr>\n"
     }
@@ -41,21 +41,35 @@ function dragStart(event) {
     console.log("being dragged");
     shipMoved = document.getElementById(event.target.id);
     console.log(shipMovedAtIndex);
+    shipMoved = event.target.id;
     event.dataTransfer.setData("text", event.target.id);
 }
 
 function onDragOver(event) {
     event.preventDefault();
 }
-
+// deals with the placement of ships on the grid 
 function onDragEnd(event) {
-    console.log(event.target.id);
     droppedShip = document.getElementById(event.dataTransfer.getData("text")); // the original ship needs to remove draggable
     droppedShip.draggable = false; 
     droppedShip.classList.remove('ship');
     droppedShip.classList.add('formerShip');
-    dropLocation = document.getElementById(event.target.id);
-    dropLocation.classList.add('ship'); // it is a cell and it is a ship 
+    // get the starting location based on dropLocation and index, then deal with orientation
+    // find starting location based on id location 
+    let dropCor = event.target.id;
+    console.log(`dropped on ${dropCor}`);
+    // x cor is dropCor.charAt(0), y cor is dropCor.charAt(1)
+    // NEED TO DEAL WITH orientation still
+
+    // find start location
+    startCor = (dropCor.charAt(0) - shipMovedAtIndex) + dropCor.charAt(1);
+    console.log(`start cor ${startCor}`);
+    let shipSize = shipMoved.charAt(0) // get ship size
+    // 
+    for(let i = 0; i < shipSize; i++) {
+        document.getElementById((parseInt(startCor.charAt(0) + "") + i + "") + startCor.charAt(1)).classList.add('ship');
+    }
+    
 }
 
 // used to update the lastmoved index for ship
