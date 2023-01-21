@@ -1,8 +1,9 @@
 // GLOBALS
 var shipMoved = ''; // will be a string indicating which ship is the one being moved
 var shipMovedAtIndex = -1; // Indicates which index cell is the one being dragged based on shipMoved
-const numS = [1, 1, 1, 1, 2, 2, 2, 3, 3, 4];
+var shipsPlacedOnGrid = 0;
 
+// SET UP GAME
 function createGrid() {
     html = "<table id=\"grid\">\n";
     for(i=0; i<10;i++) {
@@ -36,6 +37,14 @@ function createDragableShips() {
     shipArea.innerHTML = html;
 }
 
+// drag helper functions 
+// function that makes submit button appear after 14 ships have been placed
+function showSubmitBtn() {
+    // last event to be called in the setup Page, will make the start Game button pressable after this 
+    let makeButtonClick = document.getElementById("submitBtn");
+    makeButtonClick.classList.remove('unpressable');
+    makeButtonClick.classList.add('pressable');
+}
 // drag events 
 function dragStart(event) {
     console.log("being dragged");
@@ -54,6 +63,10 @@ function onDragEnd(event) {
     droppedShip.draggable = false; 
     droppedShip.classList.remove('ship');
     droppedShip.classList.add('formerShip');
+    shipsPlacedOnGrid++;// update the number of former ships 
+    if(shipsPlacedOnGrid == 10) { // all the ships are on the grid 
+        showSubmitBtn(); // create the submit button
+    }
     // get the starting location based on dropLocation and index, then deal with orientation
     // find starting location based on id location 
     let dropCor = event.target.id;
@@ -65,7 +78,6 @@ function onDragEnd(event) {
     startCor = (dropCor.charAt(0) - shipMovedAtIndex) + dropCor.charAt(1);
     console.log(`start cor ${startCor}`);
     let shipSize = shipMoved.charAt(0) // get ship size
-    // 
     for(let i = 0; i < shipSize; i++) {
         document.getElementById((parseInt(startCor.charAt(0) + "") + i + "") + startCor.charAt(1)).classList.add('ship');
     }

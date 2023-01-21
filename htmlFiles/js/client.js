@@ -13,8 +13,9 @@ var gameDisplay = (" \
     <div id=\"gridArea\"></div>\
     <div class='padding'></div> \
     <div id='shipsArea'></div>\
+    <button id='submitBtn' class='unpressable' >Start Game</button>\
     <button onclick=\"sendMsgServer()\">send msg</button>\
-    <script src=\"js/battleship.js\"></script>\
+    <script src=\"js/battleshipSetup.js\"></script>\
 \
 </body>\
 </html> \

@@ -1,3 +1,4 @@
+/* FOR THE CELS*/
 td {
     height: 30px;
     width: 30px;
@@ -16,6 +17,7 @@ table {
     border: 1px solid rgb(138, 138, 221);
 }
 
+/*for SHIPS*/
 /*cell after ship is dropped on it*/
 .ship {
     border: 2px solid rgba(38,0,255,255);
@@ -26,6 +28,31 @@ table {
     border: 2px dotted rgb(105,105,105);
 }
 
+/* page layout*/
 .padding {
     padding: 30px;
+}
+
+#gridArea {
+    width: 50%;
+    float: left;
+}
+
+#shipsArea {
+    width: 50%;
+    float: right;
+}
+
+/* BUTTONS*/
+.unpressable {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.65;
+    filter: alpha(opacity=65);
+    -webkit-box-shadow: none;
+    box-shadow: none;;
+}
+
+.pressable {
+    
 }
