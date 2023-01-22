@@ -8,11 +8,11 @@ const path = require('path');
 //set static folder
 app.use(express.static(path.join(__dirname, 'htmlFiles'))); // express uses the html folder 
 
-let gameRooms = [];
-let numGameRooms = 0;
+var gameRooms = [];
+var numGameRooms = 0;
+var gameToStatusDict = {}; // started Gamess
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
   socket.on('createGame', (gameRoomVal) => {
     // create a game, add it to the list of gameRooms if it doesn't exist yet, then make the socket join the room 
     if(!gameRooms.includes(gameRoomVal)) {
@@ -35,6 +35,7 @@ io.on('connection', (socket) => {
       const clients = io.sockets.adapter.rooms.get(gameRoomVal);
       const numClients = clients ? clients.size : 0;
       if (numClients < 2) {
+        gameToStatusDict[gameRoomVal] = 0;
         socket.join(gameRoomVal); // connect this socket and start game event
         io.to(gameRoomVal).emit("startGame");
       } 
@@ -51,6 +52,14 @@ io.on('connection', (socket) => {
     console.log(numClients);
     console.log(socket.rooms);
     io.to(socket_room).emit('msg', "i got ur message, battleship client");
+  })
+
+  socket.on('shipsSetup', (socket_room) => {
+    gameToStatusDict[socket_room]++;
+    console.log(gameToStatusDict[socket_room]);
+    if(gameToStatusDict[socket_room] == 2) { // we can start the game in clients 
+      io.to(socket_room).emit('startGameLoop');
+    }
   })
   
 });

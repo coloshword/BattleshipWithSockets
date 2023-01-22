@@ -1,6 +1,7 @@
 const socket = io(); 
 let socket_room;    // THE SOCKET ROOM that the game occurs in(and hence joins)
 
+// For the set up of ships 
 var gameDisplay = (" \
 <!DOCTYPE html>\
 <html>\
@@ -13,7 +14,7 @@ var gameDisplay = (" \
     <div id=\"gridArea\"></div>\
     <div class='padding'></div> \
     <div id='shipsArea'></div>\
-    <button id='submitBtn' class='unpressable' >Start Game</button>\
+    <button id='submitBtn' class='unpressable' onclick='shipsSetup()'>Start Game</button>\
     <button onclick=\"sendMsgServer()\">send msg</button>\
     <script src=\"js/battleshipSetup.js\"></script>\
 \
@@ -21,7 +22,23 @@ var gameDisplay = (" \
 </html> \
 ");
 
-//Starting game
+var gameLoopDisplay = (" \
+<!DOCTYPE html>\
+<html>\
+<head>\
+    <link rel=\"stylesheet\" href=\"css/gameStyle.css\"\
+</head>\
+<body>\
+    <div id=\"gridArea\"></div>\
+    <div class='padding'></div> \
+    <button onclick=\"sendMsgServer()\">send msg</button>\
+    <script src=\"js/battleshipLoop.js\"></script>\
+\
+</body>\
+</html> \
+");
+
+//set up game 
 socket.on('startGame', function (result){
     document.write(gameDisplay);
 });
@@ -32,11 +49,25 @@ function sendMsgServer() {
 
 socket.on('msg', function(msgval){
     console.log(msgval);
-})
+});
 
+// Set up ready
+function shipsSetup() {
+    socket.emit('shipsSetup', socket_room); // let the server know 
+}
 
+// starting the actual game loop
+socket.on('startGameLoop' ,function(){
+    gameLoop();
+});
 
-
+function gameLoop() {
+    // write new html to the frontend 
+    document.querySelector("html").innerHTML = "";
+    document.open();
+    document.write(gameLoopDisplay);
+    console.log("game log");
+}
 //Front End Helper functions for the landing page 
 function showPopup(option) {
     let popup;
