@@ -43,6 +43,10 @@ table {
     float: right;
 }
 
+#enemyGrid {
+    width: 50%;
+    float: right;
+}
 /* BUTTONS*/
 .unpressable {
     pointer-events: none;

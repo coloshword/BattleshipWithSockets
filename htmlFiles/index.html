@@ -3,47 +3,47 @@
 <head>
     <link rel="stylesheet" href="css/style.css">
 </head>
+<h1 style="position:absolute; left:80px; top:5px;">Battleship</h1>
 <body>
-
-    <h1>My First Heading</h1>
-    <p>My first paragraph.</p>
-    <div class="createGame">
-        <!--param 1 is create game, param 2 is to join a game-->
-        <button class="btn" onclick="showPopup(1)">Create Game</button>
-        <button class="btn" onclick="showPopup(2)">Join Game</button>
-        <div class="popup" id="createGamePopup">
-            <form onsubmit="return false">
-                <div class="form-control">
-                    <label for="Room Number">Create Room Number:</label>
-                    <input
-                        type="text"
-                        placeholder="Game Room"
-                        id="createGameRoomID"
-                        required
-                    />
-                </div>
-                <button type="submit" class="btn" onclick="joinSocketRoom(1)">Create</button>
-            </form>
+        <div class="createGame">
+            <!--param 1 is create game, param 2 is to join a game-->
+            <div class="buttonLayout">
+                <button type="button" class="btnPrimary" onclick="showPopup(1)">Create Game</button>
+                <div id="buttonPadding"></div>
+                <button type="button" class="btnSecondary" onclick="showPopup(2)">Join Game</button>
+            </div>
+            <div class="popup" id="createGamePopup">
+                <form onsubmit="return false">
+                    <div class="form-control">
+                        <label for="Room Number">Create Room:</label>
+                        <input
+                            type="text"
+                            placeholder="Game Room"
+                            id="createGameRoomID"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="btn" onclick="joinSocketRoom(1)">Create</button>
+                </form>
+            </div>
+            <div class="popup" id="joinGamePopup">
+                <form onsubmit="return false">
+                    <div class="form-control">
+                        <label for="Room Number">Join Room:</label>
+                        <input
+                            type="text"
+                            placeholder="Game Room"
+                            id="joinGameRoomID"
+                            required
+                        />
+                    </div>
+                    <button type="submit" class="btn" onclick="joinSocketRoom(2)">Join</button>
+                </form>
+            </div>
+            <div class="postCreateGameDisplay" id="postCreateGameMsg"></div>
         </div>
-        <div class="popup" id="joinGamePopup">
-            <form onsubmit="return false">
-                <div class="form-control">
-                    <label for="Room Number">Join Room Number:</label>
-                    <input
-                        type="text"
-                        placeholder="Game Room"
-                        id="joinGameRoomID"
-                        required
-                    />
-                </div>
-                <button type="submit" class="btn" onclick="joinSocketRoom(2)">Join</button>
-            </form>
-        </div>
-        <div class="postCreateGameDisplay" id="postCreateGameMsg"></div>
-    </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/client.js"></script>
-
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/client.js"></script>
 
 </body>
 </html>

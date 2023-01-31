@@ -15,7 +15,6 @@ function createGrid() {
     }
     const gameArea = document.getElementById("gridArea");
     gameArea.innerHTML = html;
-    console.log(html);
     return html;
 }
 
